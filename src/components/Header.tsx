@@ -68,7 +68,7 @@ export default function Header({ onSearch, searchQuery }: HeaderProps) {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3">
             {/* Mobile Search */}
             <div className="md:hidden">
               <button className="bg-pastel-blue p-2 rounded-full hover:bg-pastel-blue-dark hover:scale-110 transition-all duration-200 shadow-sm border border-pastel-blue-dark">
@@ -76,14 +76,14 @@ export default function Header({ onSearch, searchQuery }: HeaderProps) {
               </button>
             </div>
 
-            {/* User Menu */}
+            {/* User Menu - ALWAYS VISIBLE */}
             {state.user ? (
               <div className="relative">
                 <button
                   onClick={() => setShowUserMenu(!showUserMenu)}
-                  className="bg-pastel-lemon p-2 rounded-full hover:bg-pastel-lemon-dark hover:scale-110 transition-all duration-200 shadow-sm border border-pastel-lemon-dark transform hover:rotate-6"
+                  className="bg-pastel-lemon-dark text-white p-3 rounded-full hover:bg-pastel-lemon hover:scale-110 transition-all duration-200 shadow-lg border-2 border-white transform hover:rotate-6"
                 >
-                  <User className="w-4 h-4 text-slate-600" />
+                  <User className="w-5 h-5" />
                 </button>
                 
                 {showUserMenu && (
@@ -117,9 +117,9 @@ export default function Header({ onSearch, searchQuery }: HeaderProps) {
             ) : (
               <button
                 onClick={() => dispatch({ type: 'TOGGLE_LOGIN' })}
-                className="bg-pastel-lemon p-3 rounded-full hover:bg-pastel-lemon-dark hover:scale-110 transition-all duration-200 shadow-sm border-2 border-pastel-lemon-dark transform hover:rotate-6"
+                className="bg-pastel-lemon-dark text-white p-3 rounded-full hover:bg-pastel-lemon hover:scale-110 transition-all duration-200 shadow-lg border-2 border-white transform hover:rotate-6 animate-pulse"
               >
-                <User className="w-5 h-5 text-slate-700" />
+                <User className="w-5 h-5" />
               </button>
             )}
 
@@ -173,6 +173,21 @@ export default function Header({ onSearch, searchQuery }: HeaderProps) {
                   className="w-full pl-10 pr-4 py-2 bg-white border border-pastel-blue rounded-full focus:outline-none focus:ring-2 focus:ring-pastel-blue-dark text-sm font-medium text-slate-600 placeholder-slate-400 shadow-sm"
                 />
               </div>
+              
+              {/* Mobile User Button */}
+              {!state.user && (
+                <button
+                  onClick={() => {
+                    dispatch({ type: 'TOGGLE_LOGIN' });
+                    setIsMenuOpen(false);
+                  }}
+                  className="bg-pastel-lemon-dark text-white px-4 py-3 rounded-full font-medium text-sm hover:bg-pastel-lemon transition-all shadow-sm border border-pastel-lemon text-center transform hover:scale-105 flex items-center justify-center space-x-2"
+                >
+                  <User className="w-4 h-4" />
+                  <span>Login / Sign Up</span>
+                </button>
+              )}
+              
               <a href="#" className="bg-pastel-blue-light text-slate-600 px-4 py-2 rounded-full font-medium text-sm hover:bg-pastel-blue transition-all shadow-sm border border-pastel-blue text-center transform hover:scale-105">
                 New Arrivals
               </a>
